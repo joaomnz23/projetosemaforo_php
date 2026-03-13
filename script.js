@@ -5,7 +5,16 @@ const verde = document.getElementById("verde")
 const ligar = document.getElementById("Ligar")
 const desligar = document.getElementById("Desligar")
 
+const lento = document.getElementById("lento")
+const normal = document.getElementById("normal")
+const rapido = document.getElementById("rapido")
+
 let intervalo
+let estado = "vermelho"
+
+let tempoVermelho = 3000
+let tempoVerde = 3000
+let tempoAmarelo = 1000
 
 function apagar(){
     vermelho.className = "luz"
@@ -13,40 +22,59 @@ function apagar(){
     verde.className = "luz"
 }
 
-function iniciar(){
+function ciclo(){
 
-    vermelho.classList.add("vermelho")
+    if(estado === "vermelho"){
+        apagar()
+        verde.classList.add("verde")
+        estado = "verde"
+        intervalo = setTimeout(ciclo, tempoVerde)
+    }
 
-    intervalo = setInterval(()=>{
+    else if(estado === "verde"){
+        apagar()
+        amarelo.classList.add("amarelo")
+        estado = "amarelo"
+        intervalo = setTimeout(ciclo, tempoAmarelo)
+    }
 
-        if(vermelho.classList.contains("vermelho")){
-            apagar()
-            verde.classList.add("verde")
-        }
-
-        else if(verde.classList.contains("verde")){
-            apagar()
-            amarelo.classList.add("amarelo")
-
-            setTimeout(()=>{
-                apagar()
-                vermelho.classList.add("vermelho")
-            },2000)
-        }
-
-        else{
-            apagar()
-            vermelho.classList.add("vermelho")
-        }
-
-    },5000)
+    else{
+        apagar()
+        vermelho.classList.add("vermelho")
+        estado = "vermelho"
+        intervalo = setTimeout(ciclo, tempoVermelho)
+    }
 
 }
 
+function iniciar(){
+    estado = "vermelho"
+    vermelho.classList.add("vermelho")
+    intervalo = setTimeout(ciclo, tempoVermelho)
+}
+
 function parar(){
-    clearInterval(intervalo)
+    clearTimeout(intervalo)
     apagar()
 }
 
 ligar.addEventListener("click", iniciar)
 desligar.addEventListener("click", parar)
+
+lento.addEventListener("click", ()=>{
+    tempoVermelho = 2000
+    tempoVerde = 1000
+    tempoAmarelo = 2000
+})
+
+normal.addEventListener("click", ()=>{
+    tempoVermelho = 1000
+    tempoVerde = 500
+    tempoAmarelo = 1000
+})
+
+rapido.addEventListener("click", ()=>{
+    tempoVermelho = 100
+    tempoVerde = 50
+    tempoAmarelo = 100
+})
