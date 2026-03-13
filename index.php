@@ -12,6 +12,7 @@ $semaforo = new Semaforo("COM6");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Semáforo</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -21,14 +22,18 @@ $semaforo = new Semaforo("COM6");
         <div id="verde" class="luz"></div>
     </div>
 
+    <br>
     <button id="Desligar" onclick="<?php $semaforo->desligar(); ?>">Desligar</button>
-
+    <br>
     <button id="lento" onclick="<?php $semaforo->lento() ?>">Lento</button>
+    <br>
     <button id="normal" onclick="<?php $semaforo->medio() ?>">Normal</button>
+    <br>
     <button id="rapido" onclick="<?php $semaforo->rapido() ?>">Rápido</button>
 
-    <script src="tresF.js"></script>
+
 
 </body>
+<script src="script.js"></script>
 
 </html>
