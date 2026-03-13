@@ -37,7 +37,7 @@ void loop() {
   }
 
   // MODO P: RESET (DESLIGAR TUDO)
-  if (modo == '	p') {
+  if (modo == 'D') {
     digitalWrite(vermelho, LOW);
     digitalWrite(amarelo, LOW);
     digitalWrite(verde, LOW);
