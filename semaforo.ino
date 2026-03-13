@@ -1,7 +1,7 @@
 int vermelho = 11;
 int amarelo = 10;
 int verde = 9;
-char modo;
+char modo = 'p';
 
 void setup() {
   Serial.begin(9600);
@@ -11,35 +11,86 @@ void setup() {
 }
 
 void loop() {
+
   if (Serial.available() > 0) {
     modo = Serial.read();
   }
 
-  // MODO 1: LENTO
+  // MODO 1
   if (modo == '1') {
-    digitalWrite(verde, HIGH);    delay(20000); digitalWrite(verde, LOW);
-    digitalWrite(amarelo, HIGH);  delay(10000); digitalWrite(amarelo, LOW);
-    digitalWrite(vermelho, HIGH); delay(20000); digitalWrite(vermelho, LOW);
+    digitalWrite(verde, HIGH);
+    if (esperar(20000)) return;
+    digitalWrite(verde, LOW);
+
+    digitalWrite(amarelo, HIGH);
+    if (esperar(3000)) return;
+    digitalWrite(amarelo, LOW);
+
+    digitalWrite(vermelho, HIGH);
+    if (esperar(20000)) return;
+    digitalWrite(vermelho, LOW);
+
+    modo = 'p';
   }
 
-  // MODO 2: MEDIO
+  // MODO 2
   if (modo == '2') {
-    digitalWrite(verde, HIGH);    delay(15000); digitalWrite(verde, LOW);
-    digitalWrite(amarelo, HIGH);  delay(5000);  digitalWrite(amarelo, LOW);
-    digitalWrite(vermelho, HIGH); delay(15000); digitalWrite(vermelho, LOW);
+    digitalWrite(verde, HIGH);
+    if (esperar(15000)) return;
+    digitalWrite(verde, LOW);
+
+    digitalWrite(amarelo, HIGH);
+    if (esperar(3000)) return;
+    digitalWrite(amarelo, LOW);
+
+    digitalWrite(vermelho, HIGH);
+    if (esperar(15000)) return;
+    digitalWrite(vermelho, LOW);
+
+    modo = 'p';
   }
 
-  // MODO 3: RAPIDO
+  // MODO 3
   if (modo == '3') {
-    digitalWrite(verde, HIGH);    delay(10000); digitalWrite(verde, LOW);
-    digitalWrite(amarelo, HIGH);  delay(3000);  digitalWrite(amarelo, LOW);
-    digitalWrite(vermelho, HIGH); delay(10000); digitalWrite(vermelho, LOW);
+    digitalWrite(verde, HIGH);
+    if (esperar(10000)) return;
+    digitalWrite(verde, LOW);
+
+    digitalWrite(amarelo, HIGH);
+    if (esperar(3000)) return;
+    digitalWrite(amarelo, LOW);
+
+    digitalWrite(vermelho, HIGH);
+    if (esperar(10000)) return;
+    digitalWrite(vermelho, LOW);
+
+    modo = 'p';
   }
 
-  // MODO P: RESET (DESLIGAR TUDO)
-  if (modo == 'D') {
+  // RESET
+  if (modo == 'p') {
     digitalWrite(vermelho, LOW);
     digitalWrite(amarelo, LOW);
     digitalWrite(verde, LOW);
   }
+}
+
+bool esperar(long tempo) {
+  long inicio = millis();
+
+  while (millis() - inicio < tempo) {
+
+    if (Serial.available() > 0) {
+      char comando = Serial.read();
+      if (comando == 'p') {
+        modo = 'p';
+        digitalWrite(vermelho, LOW);
+        digitalWrite(amarelo, LOW);
+        digitalWrite(verde, LOW);
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
