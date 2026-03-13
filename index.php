@@ -2,7 +2,7 @@
 
 require "arduino.php";
 
-$semaforo = new Semaforo("COM6");
+$semaforo = new Semaforo("COM3");
 ?>
 
 <!DOCTYPE html>
