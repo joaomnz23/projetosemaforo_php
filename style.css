@@ -1,33 +1,12 @@
-body{
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
 }
 
-.semaforo{
-  background:black;
-  padding:20px;
-  border-radius:10px;
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
 }
-
-.luz{
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  margin:10px;
-  background:#444;
-}
-
-.vermelho{
-  background:red;
-}
-
-.amarelo{
-  background:yellow;
-}
-
-.verde{
-  background:green;
-}
-

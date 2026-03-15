@@ -1,7 +1,6 @@
 <?php
-class Semaforo
+class Arduino
 {
-
     private $porta;
 
     public function __construct($porta)
@@ -9,29 +8,31 @@ class Semaforo
         $this->porta = $porta;
     }
 
-    private function enviar($cmd)
+    private function enviarComando($comando)
     {
-
-        exec("echo $cmd > {$this->porta}");
+        // O '&' permite rodar dois comandos em sequência no Windows
+        // Configuramos a porta e enviamos o comando logo em seguida
+        $cmd = "mode " . $this->porta . " BAUD=9600 PARITY=N DATA=8 STOP=1 & echo " . $comando . " > " . $this->porta;
+        exec($cmd);
     }
 
     public function desligar()
     {
-        $this->enviar("D");
-    }
-
-    public function lento()
-    {
-        $this->enviar("1");
-    }
-
-    public function medio()
-    {
-        $this->enviar("2");
+        $this->enviarComando("d");
     }
 
     public function rapido()
     {
-        $this->enviar("3");
+        $this->enviarComando("r");
+    }
+
+    public function medio()
+    {
+        $this->enviarComando("m");
+    }
+
+    public function lento()
+    {
+        $this->enviarComando("l");
     }
 }
