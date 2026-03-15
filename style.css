@@ -1,12 +1,47 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin-top: 50px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin-top: 50px;
 }
 
 button {
-    font-size: 18px;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* Caixa do semáforo */
+.semaforo {
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;      /* ajusta ao conteúdo */
+  margin: 20px auto;       /* centraliza na horizontal */
+  display: flex;
+  flex-direction: column;  /* bolinhas em coluna */
+  align-items: center;     /* centraliza as bolinhas */
+}
+
+/* Estilo base das luzes */
+.luz {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 10px 0;          /* espaço entre as bolinhas */
+  background: #444;        /* apagada */
+  transition: background 0.2s;
+}
+
+/* Cores quando acesas */
+.vermelho {
+  background: red;
+}
+
+.amarelo {
+  background: yellow;
+}
+
+.verde {
+  background: green;
 }

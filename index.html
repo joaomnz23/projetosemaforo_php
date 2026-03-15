@@ -8,7 +8,14 @@
 </head>
 
 <body>
-  <h1>Controle Arduino</h1>
+
+  <div class="semaforo">
+    <div id="vermelho" class="luz"></div>
+    <div id="amarelo" class="luz"></div>
+    <div id="verde" class="luz"></div>
+  </div>
+
+  <h1>Controle de Modos</h1>
   <button onclick="enviar('desligar')">Desligar</button>
   <button onclick="enviar('rapido')">Modo Rápido</button>
   <button onclick="enviar('medio')">Modo Médio</button>
